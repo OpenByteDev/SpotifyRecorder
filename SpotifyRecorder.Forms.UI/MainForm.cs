@@ -381,7 +381,7 @@ namespace SpotifyRecorder.Forms.UI {
         }
 
         private void HelpLinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            Process.Start("http://spotifyrecorder.codeplex.com");
+            Process.Start("https://github.com/OpenByteDev/SpotifyRecorder");
 
         }
 

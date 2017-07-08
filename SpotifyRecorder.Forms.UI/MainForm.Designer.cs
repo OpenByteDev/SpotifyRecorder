@@ -44,7 +44,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.songLabel = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.browseButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -208,16 +207,6 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 388);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(210, 13);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "For more information, check the online help";
-            // 
             // linkLabel1
             // 
             this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Gray;
@@ -226,10 +215,10 @@
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.linkLabel1.Location = new System.Drawing.Point(9, 411);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(181, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(248, 13);
             this.linkLabel1.TabIndex = 17;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://spotifyrecorder.codeplex.com";
+            this.linkLabel1.Text = "https://github.com/OpenByteDev/SpotifyRecorder";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLinkClicked);
             // 
             // browseButton
@@ -316,7 +305,6 @@
             this.Controls.Add(this.thresholdCheckBox);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.outputFolderTextBox);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.buttonOpenFolder);
@@ -361,7 +349,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label songLabel;
         private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.Label label6;
