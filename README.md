@@ -15,7 +15,7 @@ It records the Spotify tracks directly from the soundcard and adds the track and
 
 The application is created with .net framework 4.5 and is uses the the nAudio library [nAudio library](http://naudio.codeplex.com/). 
 
-It was tested in Windows 10 (64bit) and Spotify 1.0.58.573, 0.9.6.81, 0.9.14.13
+It was tested in Windows 10 (64bit) and Spotify 1.0.58.573, 0.9.14.13, 0.9.6.81
 
 
 Original Project: https://spotifyrecorder.codeplex.com/
