@@ -24,7 +24,6 @@ All credit goes to the original author [remkovanbrakel](https://www.codeplex.com
 
 This project was made for educational purposes only.
 
-
-
+## [Download](https://github.com/OpenByteDev/SpotifyRecorder/raw/master/SpotifyRecorder.zip)
 
 [logo]: https://i.imgur.com/1uPqnL7.png "Spotify Recorder - Main Window"
