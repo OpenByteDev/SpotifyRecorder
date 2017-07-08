@@ -72,13 +72,13 @@
             this.deviceListBox.FormattingEnabled = true;
             this.deviceListBox.Location = new System.Drawing.Point(158, 12);
             this.deviceListBox.Name = "deviceListBox";
-            this.deviceListBox.Size = new System.Drawing.Size(493, 21);
+            this.deviceListBox.Size = new System.Drawing.Size(497, 21);
             this.deviceListBox.TabIndex = 1;
             // 
             // buttonOpenFolder
             // 
             this.buttonOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOpenFolder.Location = new System.Drawing.Point(576, 262);
+            this.buttonOpenFolder.Location = new System.Drawing.Point(580, 262);
             this.buttonOpenFolder.Name = "buttonOpenFolder";
             this.buttonOpenFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonOpenFolder.TabIndex = 15;
@@ -89,7 +89,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Location = new System.Drawing.Point(576, 233);
+            this.buttonDelete.Location = new System.Drawing.Point(580, 233);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 14;
@@ -100,7 +100,7 @@
             // buttonPlay
             // 
             this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlay.Location = new System.Drawing.Point(576, 204);
+            this.buttonPlay.Location = new System.Drawing.Point(580, 204);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(75, 23);
             this.buttonPlay.TabIndex = 13;
@@ -117,7 +117,7 @@
             this.listBoxRecordings.Location = new System.Drawing.Point(12, 204);
             this.listBoxRecordings.Name = "listBoxRecordings";
             this.listBoxRecordings.ScrollAlwaysVisible = true;
-            this.listBoxRecordings.Size = new System.Drawing.Size(558, 160);
+            this.listBoxRecordings.Size = new System.Drawing.Size(562, 173);
             this.listBoxRecordings.TabIndex = 12;
             // 
             // buttonStopRecording
@@ -156,7 +156,7 @@
             this.outputFolderTextBox.Enabled = false;
             this.outputFolderTextBox.Location = new System.Drawing.Point(158, 41);
             this.outputFolderTextBox.Name = "outputFolderTextBox";
-            this.outputFolderTextBox.Size = new System.Drawing.Size(412, 20);
+            this.outputFolderTextBox.Size = new System.Drawing.Size(416, 20);
             this.outputFolderTextBox.TabIndex = 2;
             // 
             // label4
@@ -175,7 +175,7 @@
             this.bitrateComboBox.FormattingEnabled = true;
             this.bitrateComboBox.Location = new System.Drawing.Point(158, 94);
             this.bitrateComboBox.Name = "bitrateComboBox";
-            this.bitrateComboBox.Size = new System.Drawing.Size(493, 21);
+            this.bitrateComboBox.Size = new System.Drawing.Size(497, 21);
             this.bitrateComboBox.TabIndex = 5;
             // 
             // label2
@@ -199,7 +199,7 @@
             // clearButton
             // 
             this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearButton.Location = new System.Drawing.Point(576, 291);
+            this.clearButton.Location = new System.Drawing.Point(580, 291);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 16;
@@ -213,7 +213,7 @@
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkLabel1.Location = new System.Drawing.Point(9, 411);
+            this.linkLabel1.Location = new System.Drawing.Point(9, 410);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(248, 13);
             this.linkLabel1.TabIndex = 17;
@@ -224,7 +224,7 @@
             // browseButton
             // 
             this.browseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseButton.Location = new System.Drawing.Point(576, 39);
+            this.browseButton.Location = new System.Drawing.Point(580, 39);
             this.browseButton.Name = "browseButton";
             this.browseButton.Size = new System.Drawing.Size(75, 23);
             this.browseButton.TabIndex = 3;
@@ -282,7 +282,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.namingPatternTextBox.Location = new System.Drawing.Point(158, 67);
             this.namingPatternTextBox.Name = "namingPatternTextBox";
-            this.namingPatternTextBox.Size = new System.Drawing.Size(493, 20);
+            this.namingPatternTextBox.Size = new System.Drawing.Size(497, 20);
             this.namingPatternTextBox.TabIndex = 4;
             // 
             // label8
@@ -298,7 +298,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 458);
+            this.ClientSize = new System.Drawing.Size(667, 432);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.namingPatternTextBox);
             this.Controls.Add(this.thresholdTextBox);

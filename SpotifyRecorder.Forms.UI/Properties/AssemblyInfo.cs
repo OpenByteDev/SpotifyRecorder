@@ -1,16 +1,17 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpotifyRecorder.Forms.UI")]
+[assembly: AssemblyTitle("SpotifyRecorder")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SpotifyRecorder.Forms.UI")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCompany("Openbyte Development")]
+[assembly: AssemblyProduct("SpotifyRecorder")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1c3c8c49-2645-43e6-97fe-85c7f1e2e779")]
+[assembly: Guid("1c3c8c49-2645-43e6-97fe-85c7f1e2e770")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +33,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2013.01.05.01")]
-[assembly: AssemblyFileVersion("2013.01.05.01")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.05.01")]
+[assembly: NeutralResourcesLanguage("en")]
+
