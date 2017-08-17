@@ -13,7 +13,8 @@ It records the Spotify tracks directly from the soundcard and adds the track and
 
 - You can now choose a custom naming pattern (%t = title, %a = artist)
 
-The application is created with .net framework 4.5 and is uses the [nAudio library](https://github.com/naudio/NAudio). 
+
+The application is created with .net framework 4.5 and uses the [nAudio library](https://github.com/naudio/NAudio). 
 
 It was tested in Windows 10 (64bit) and Spotify 1.0.58.573, 0.9.14.13, 0.9.6.81
 
