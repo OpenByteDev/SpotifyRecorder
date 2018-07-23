@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Configuration;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using NAudio.CoreAudioApi;
-using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +24,16 @@ namespace SpotifyRecorder.Forms.UI {
         private Timer songTicker;
         private FolderBrowserDialog folderDialog;
         private ApplicationState _currentApplicationState = ApplicationState.NotRecording;
+        private string _currentSong;
+        private string CurrentSong {
+            set {
+                songLabel.Text = value;
+                _currentSong = value;
+            }
+            get => _currentSong;
+        }
+        private string CurrentSongFileSafe => RemoveInvalidFilePathCharacters(CurrentSong);
+        private MMDevice SelectedDevice => (MMDevice)deviceListBox.SelectedItem;
 
         public MainForm() {
             InitializeComponent();
@@ -52,7 +59,7 @@ namespace SpotifyRecorder.Forms.UI {
                         case ApplicationState.WaitingForRecording:
                             break;
                         case ApplicationState.Recording:
-                            StartRecording((MMDevice)deviceListBox.SelectedItem, songLabel.Text);
+                            StartRecording(SelectedDevice, CurrentSong);
                             break;
                         case ApplicationState.Closing:
                             break;
@@ -66,7 +73,7 @@ namespace SpotifyRecorder.Forms.UI {
                         case ApplicationState.WaitingForRecording:
                             throw new Exception(string.Format("NY {0} - {1}", _currentApplicationState, newState));
                         case ApplicationState.Recording:
-                            StartRecording((MMDevice)deviceListBox.SelectedItem, songLabel.Text);
+                            StartRecording(SelectedDevice, CurrentSong);
                             break;
                         case ApplicationState.Closing:
                             Close();
@@ -80,7 +87,7 @@ namespace SpotifyRecorder.Forms.UI {
                             break;
                         case ApplicationState.Recording: //file changed
                             StopRecording();
-                            StartRecording((MMDevice)deviceListBox.SelectedItem, songLabel.Text);
+                            StartRecording(SelectedDevice, CurrentSong);
                             break;
                         case ApplicationState.WaitingForRecording: //file changed
                             StopRecording();
@@ -150,7 +157,7 @@ namespace SpotifyRecorder.Forms.UI {
             songTicker.Start();
 
             //set the change event if filePath is 
-            songLabel.Text = string.Empty;
+            CurrentSong = string.Empty;
 
             folderDialog = new FolderBrowserDialog { SelectedPath = outputFolderTextBox.Text };
 
@@ -175,10 +182,9 @@ namespace SpotifyRecorder.Forms.UI {
 
         void SongTickerTick(object sender, EventArgs e) {
             //get the current title from spotify
-            string song = GetSpotifySong();
+            CurrentSong = GetSpotifySong();
 
-            if (!songLabel.Text.Equals(song)) {
-                songLabel.Text = song;
+            if (!songLabel.Text.Equals(CurrentSong)) {
                 if (songLabel.Text.Trim().Length > 0) {
                     if (_currentApplicationState != ApplicationState.NotRecording)
                         ChangeApplicationState(ApplicationState.Recording);
@@ -191,7 +197,6 @@ namespace SpotifyRecorder.Forms.UI {
                 }
             }
         }
-
 
         private void ButtonPlayClick(object sender, EventArgs e) {
             if (listBoxRecordings.SelectedItem != null) {
@@ -233,8 +238,6 @@ namespace SpotifyRecorder.Forms.UI {
 
         private string CreateOutputFile(string song, string extension) {
             return CreateOutputFile(namingPatternTextBox.Text, song, extension);
-            //song = RemoveInvalidFilePathCharacters(song, string.Empty);
-            //return Path.Combine(outputFolderTextBox.Text, string.Format("{0}.{1}", song, extension));
         }
         private string CreateOutputFile(string pattern, string song, string extension) {
             var tag = Util.ExtractMp3Tag(song);
@@ -249,8 +252,8 @@ namespace SpotifyRecorder.Forms.UI {
                     StopRecording();
 
                 SoundCardRecorder = new SoundCardRecorder(
-                                device, CreateOutputFile(songLabel.Text, "wav"),
-                                songLabel.Text);
+                                device, CreateOutputFile(CurrentSong, "wav"),
+                                CurrentSong);
                 SoundCardRecorder.Start();
             }
         }
@@ -280,7 +283,6 @@ namespace SpotifyRecorder.Forms.UI {
 
         }
 
-
         private void ConvertToMp3(string filePath, int bitrate) {
             if (!File.Exists(CreateOutputFile(filePath, "wav")))
                 return;
@@ -296,7 +298,7 @@ namespace SpotifyRecorder.Forms.UI {
             Mp3Tag tag = Util.ExtractMp3Tag(filePath);
 
             process.StartInfo.FileName = "lame.exe";
-            process.StartInfo.Arguments = string.Format("-b {2} --tt \"{3}\" --ta \"{4}\"  \"{0}\" \"{1}\"",
+            process.StartInfo.Arguments = string.Format("-h -b {2} --tt \"{3}\" --ta \"{4}\" \"{0}\" \"{1}\"",
                 CreateOutputFile(filePath, "wav"),
                 CreateOutputFile(filePath, "mp3"),
                 bitrate,
@@ -364,7 +366,6 @@ namespace SpotifyRecorder.Forms.UI {
                     return song;
             }
             return string.Empty;
-
         }
 
         private void PostProcessing(string song) {
@@ -373,8 +374,7 @@ namespace SpotifyRecorder.Forms.UI {
             t.Start();
         }
 
-
-        public static string RemoveInvalidFilePathCharacters(string filename, string replaceChar) {
+        public static string RemoveInvalidFilePathCharacters(string filename, string replaceChar="") {
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
             return r.Replace(filename, replaceChar);
@@ -382,7 +382,6 @@ namespace SpotifyRecorder.Forms.UI {
 
         private void HelpLinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             Process.Start("https://github.com/OpenByteDev/SpotifyRecorder");
-
         }
 
         private void BrowseButtonClick(object sender, EventArgs e) {
