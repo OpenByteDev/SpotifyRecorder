@@ -32,7 +32,7 @@ namespace SpotifyRecorder.Forms.UI {
             }
             get => _currentSong;
         }
-        private string CurrentSongFileSafe => RemoveInvalidFilePathCharacters(CurrentSong);
+        // private string CurrentSongFileSafe => RemoveInvalidFilePathCharacters(CurrentSong);
         private MMDevice SelectedDevice => (MMDevice)deviceListBox.SelectedItem;
 
         public MainForm() {
@@ -94,7 +94,6 @@ namespace SpotifyRecorder.Forms.UI {
                             break;
                     }
                     break;
-
             }
             _currentApplicationState = newState;
         }
@@ -131,9 +130,7 @@ namespace SpotifyRecorder.Forms.UI {
                     thresholdTextBox.Enabled = false;
                     namingPatternTextBox.Enabled = false;
                     break;
-
             }
-
         }
         /// <summary>
         /// After the form is created
@@ -153,7 +150,7 @@ namespace SpotifyRecorder.Forms.UI {
 
             //check if spotify title is changing
             songTicker = new Timer { Interval = Settings.Default.SongscanInterval };
-            songTicker.Tick += SongTickerTick;
+            songTicker.Tick += SongTick;
             songTicker.Start();
 
             //set the change event if filePath is 
@@ -180,7 +177,7 @@ namespace SpotifyRecorder.Forms.UI {
             Util.SetDefaultNamingPattern(namingPatternTextBox.Text);
         }
 
-        void SongTickerTick(object sender, EventArgs e) {
+        private void SongTick(object sender, EventArgs e) {
             //get the current title from spotify
             CurrentSong = GetSpotifySong();
 
@@ -193,7 +190,6 @@ namespace SpotifyRecorder.Forms.UI {
                 } else {
                     if (_currentApplicationState == ApplicationState.Recording)
                         ChangeApplicationState(ApplicationState.WaitingForRecording);
-
                 }
             }
         }
@@ -259,28 +255,23 @@ namespace SpotifyRecorder.Forms.UI {
         }
 
         private void StopRecording() {
-            string filePath = string.Empty;
-            string song = string.Empty;
-            TimeSpan duration = new TimeSpan();
             if (SoundCardRecorder != null) {
                 SoundCardRecorder.Stop();
-                filePath = SoundCardRecorder.FilePath;
-                song = SoundCardRecorder.Song;
-                duration = SoundCardRecorder.Duration;
+                string filePath = SoundCardRecorder.FilePath;
+                string song = SoundCardRecorder.Song;
+                TimeSpan duration = SoundCardRecorder.Duration;
                 SoundCardRecorder.Dispose();
                 SoundCardRecorder = null;
 
-                if (duration.Seconds < (int)thresholdTextBox.Value && thresholdCheckBox.Checked)
+                if (duration.Seconds < (int)thresholdTextBox.Value && thresholdCheckBox.Checked) {
                     File.Delete(filePath);
-                else {
+                } else {
                     if (!string.IsNullOrEmpty(filePath)) {
-                        int newItemIndex = listBoxRecordings.Items.Add(song);
-                        listBoxRecordings.SelectedIndex = newItemIndex;
+                        listBoxRecordings.SelectedIndex = listBoxRecordings.Items.Add(song);
                         PostProcessing(song);
                     }
                 }
             }
-
         }
 
         private void ConvertToMp3(string filePath, int bitrate) {
@@ -321,9 +312,7 @@ namespace SpotifyRecorder.Forms.UI {
             deviceListBox.DisplayMember = "FriendlyName";
         }
         private void LoadBitrateCombo() {
-            List<int> bitrate = new List<int> { 96, 128, 160, 192, 320 };
-
-            bitrateComboBox.DataSource = bitrate;
+            bitrateComboBox.DataSource = new List<int> { 96, 128, 160, 192, 320 };
         }
 
         /// <summary>
@@ -348,22 +337,22 @@ namespace SpotifyRecorder.Forms.UI {
 
             thresholdTextBox.Value = Util.GetDefaultThreshold();
             thresholdCheckBox.Checked = Util.GetDefaultThresholdEnabled();
-
         }
 
-        private string GetSpotifySong() {
+        private static string GetSpotifySong() {
             Process[] processes = Process.GetProcessesByName("spotify");
-            if (processes != null && processes.Length > 0) {
-                string song = processes.Select(p => p.MainWindowTitle).Where(t => !string.IsNullOrWhiteSpace(t) && t.ToLower().Trim() != "spotify").FirstOrDefault();
+            if (processes?.Length > 0) {
+                string song = processes.Select(p => p.MainWindowTitle).FirstOrDefault(t => !string.IsNullOrWhiteSpace(t) && t.ToLower().Trim() != "spotify");
                 if (song == null)
                     return string.Empty;
-                if (song.Contains("spotify"))
+                if (song.Contains("spotify")) {
                     if (song.Length > 7)
                         return song.Substring(10);
                     else
                         return string.Empty;
-                else
+                } else {
                     return song;
+                }
             }
             return string.Empty;
         }
@@ -376,7 +365,7 @@ namespace SpotifyRecorder.Forms.UI {
 
         public static string RemoveInvalidFilePathCharacters(string filename, string replaceChar="") {
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+            Regex r = new Regex($"[{Regex.Escape(regexSearch)}]");
             return r.Replace(filename, replaceChar);
         }
 
@@ -394,6 +383,5 @@ namespace SpotifyRecorder.Forms.UI {
         private void OpenMixerButtonClick(object sender, EventArgs e) {
             Process.Start("sndvol");
         }
-        
     }
 }

@@ -2,7 +2,7 @@
 using System.IO;
 
 namespace SpotifyRecorder.Forms.UI {
-    public class Util {
+    public static class Util {
         public static string GetDefaultOutputPath() {
             if (string.IsNullOrEmpty(Settings.Default.OutputPath)) {
                 Settings.Default.OutputPath = Path.Combine(
@@ -41,7 +41,6 @@ namespace SpotifyRecorder.Forms.UI {
         }
         public static int GetDefaultThreshold() {
             return Settings.Default.DeleteThreshold;
-
         }
         public static void SetDefaultThresholdEnabled(bool threshold) {
             Settings.Default.DeleteThresholdEnabled = threshold;
@@ -49,7 +48,6 @@ namespace SpotifyRecorder.Forms.UI {
         }
         public static bool GetDefaultThresholdEnabled() {
             return Settings.Default.DeleteThresholdEnabled;
-
         }
         public static void SetDefaultBitrate(int bitrate) {
             Settings.Default.Bitrate = bitrate;
@@ -57,14 +55,14 @@ namespace SpotifyRecorder.Forms.UI {
         }
         public static Mp3Tag ExtractMp3Tag(string song) {
             string[] split = song.Split(new[] { " – ", " - " }, 2, StringSplitOptions.RemoveEmptyEntries);
+
             if (split.Length == 0)
                 return null;
-            Mp3Tag tag = new Mp3Tag(
+
+            return new Mp3Tag(
                 split.Length > 1 ? split[1] : string.Empty,
                 split[0]
-                );
-            return tag;
+            );
         }
-
     }
 }
